@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e0eafc, #cfdef3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 900px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 12px 24px;
+            background-color: #7b6039;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #5a4429;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f5f5f5;
+        }
+
+        .fixed-buttons {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .fixed-buttons form button {
+            background-color: #7b6039;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Manage Attendance Records</h1>
+
+        <form method="POST" action="{{ url_for('add_student') }}">
+            <input type="text" name="name" placeholder="Student Name" required>
+            <input type="text" name="attendance" placeholder="Attendance (e.g. Present/Absent)" required>
+            <button type="submit">Add Student</button>
+        </form>
+
+        {% if records %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Attendance</th>
+                    <th>Quiz Score</th>
+                    <th>Exam Score</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in records %}
+                <tr>
+                    <td>{{ student.id }}</td>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.attendance }}</td>
+                    <td>{{ student.quiz_score }}</td>
+                    <td>{{ student.exam_score }}</td>
+                    <td>
+                        <a href="{{ url_for('edit', student_id=student.id) }}">Edit</a> |
+                        <a href="{{ url_for('delete', student_id=student.id) }}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p style="text-align: center;">No student records yet.</p>
+        {% endif %}
+    </div>
+
+    <div class="fixed-buttons">
+        <form action="{{ url_for('admin_home') }}" method="get">
+            <button type="submit">← Back to Home</button>
+        </form>
+        <form action="{{ url_for('admin_logout') }}" method="get">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+</body>
+</html>

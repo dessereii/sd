@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .student-form-container {
+            background: white;
+            padding: 100px;
+            max-width: 600px;
+            margin: 100px auto;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .student-form-container h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .student-form-container p {
+            margin-bottom: 60px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .student-button-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .student-button-row a {
+            flex: 1;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #7b6039;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .student-button-row a:hover {
+            background-color: #5a4429;
+        }
+
+        .logout-button {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        .logout-button a {
+            background-color: #7b6039;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .logout-button a:hover {
+            background-color: #5a4429;
+        }
+    </style>
+</head>
+<body>
+    <div class="student-form-container">
+        <h1>Welcome, {{ student_name }}!</h1>
+        <p>You have successfully logged in.</p>
+
+        <div class="student-button-row">
+            <a href="{{ url_for('attendance_page') }}">Attendance</a>
+            <a href="{{ url_for('student_quiz') }}">Quiz</a>
+            <a href="{{ url_for('exam_page') }}">Exam</a>
+        </div>
+    </div>
+
+    <div class="logout-button">
+        <a href="{{ url_for('student_logout') }}">Logout</a>
+    </div>
+</body>
+</html>

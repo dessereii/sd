@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e0eafc, #cfdef3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 900px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quiz-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background-color: #7b6039;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .quiz-button:hover {
+            background-color: #7b6039;
+        }
+
+        .fixed-buttons {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .fixed-buttons form button {
+            background-color: #7b6039;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .fixed-buttons form button:hover {
+            background-color: #7b6039;
+        }
+
+        .export-buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .export-buttons a {
+            background-color: #7b6039;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .export-buttons a:hover {
+            background-color: #7b6039;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Manage Quiz</h1>
+
+        <a href="{{ url_for('create_quiz') }}" class="quiz-button">Create Quiz</a>
+        <a href="{{ url_for('assign_quiz') }}" class="quiz-button">Assign Quiz</a>
+        <a href="{{ url_for('view_records') }}" class="quiz-button">View Records</a>
+
+        <div class="export-buttons">
+            <a href="{{ url_for('admin_quiz_export_csv') }}">Export CSV</a>
+            <a href="{{ url_for('admin_quiz_export_pdf') }}">Export PDF</a>
+        </div>        
+    </div>
+
+    <div class="fixed-buttons">
+        <form action="{{ url_for('admin_home') }}" method="get">
+            <button type="submit">← Back to Home</button>
+        </form>
+        <form action="{{ url_for('admin_logout') }}" method="get">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+</body>
+</html>
